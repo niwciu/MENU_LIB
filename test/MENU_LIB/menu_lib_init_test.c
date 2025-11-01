@@ -62,7 +62,7 @@ TEST(menu_lib_init, WhenMenuViewInitWithTooDeepMenuThenReturnMenuDepthTooShallow
         deep_menu[i].child = (i < MAX_MENU_DEPTH) ? &deep_menu[i + 1] : NULL;
 
     menu_status_t status = menu_view_init(&deep_menu[0], NULL, NULL);
-    TEST_ASSERT_EQUAL(MENU_ERR_MENU_DEPTH_TOO_SHALLOW, status);
+    TEST_ASSERT_EQUAL(MENU_ERR_MENU_TOO_DEEP, status);
 }
 
 TEST(menu_lib_init, WhenMenuViewInitWithValidMenuThenReturnOk)

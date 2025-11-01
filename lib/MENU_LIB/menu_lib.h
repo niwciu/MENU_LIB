@@ -63,7 +63,7 @@ extern "C"
      * - MENU_OK — View initialized successfully.
      * - MENU_ERR_NOT_INITIALIZED — Menu system not initialized (menu_init() not called).
      * - MENU_ERR_NO_MENU — Root menu pointer is NULL.
-     * - MENU_ERR_MENU_DEPTH_TOO_SHALLOW — Menu depth exceeds MAX_MENU_DEPTH.
+     * - MENU_ERR_MENU_TOO_DEEP — Menu depth exceeds MAX_MENU_DEPTH.
      */
     menu_status_t menu_view_init(menu_t *root_menu, menu_exit_cb_t menu_exit_cb, const char *custom_menu_header);
 

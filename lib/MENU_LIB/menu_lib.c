@@ -122,7 +122,7 @@ menu_status_t menu_init(void)
  * - MENU_OK — Menu view successfully initialized
  * - MENU_ERR_NOT_INITIALIZED — Menu engine not initialized
  * - MENU_ERR_NO_MENU — root_menu pointer is NULL
- * - MENU_ERR_MENU_DEPTH_TOO_SHALLOW — Menu depth exceeds MAX_MENU_DEPTH
+ * - MENU_ERR_MENU_TOO_DEEP — Menu depth exceeds MAX_MENU_DEPTH
  */
 menu_status_t menu_view_init(menu_t *root_menu, menu_exit_cb_t menu_exit_cb, const char *custom_menu_header)
 {
@@ -324,7 +324,7 @@ static menu_status_t validate_menu_view(const menu_t *root_menu)
     }
     else if (compute_menu_depth(root_menu) > MAX_MENU_DEPTH)
     {
-        status = MENU_ERR_MENU_DEPTH_TOO_SHALLOW;
+        status = MENU_ERR_MENU_TOO_DEEP;
     }
 
     return status;
