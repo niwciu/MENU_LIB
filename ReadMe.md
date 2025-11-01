@@ -1,30 +1,61 @@
-# 📜 MENU_LIB - C Modular Cross-Platform C Menu Engine
+# 📜 MENU_LIB — Hierarchical Menu Engine for Embedded Systems
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![CMake](https://img.shields.io/badge/build-cmake-green)](https://cmake.org/)
 
-`MENU_LIB` is a **lightweight and portable C library** for creating hierarchical menus on embedded systems. It is built on **doubly linked lists**, providing **efficient forward/backward navigation**, submenu support, and dynamic menu rendering. The library abstracts the display driver, allowing it to work on **LCD, OLED, terminal screens**, or any custom display interface.
+`MENU_LIB` is a **lightweight and portable C library** for building **hierarchical text-based menus** on embedded systems.  
+It is based on a **tree of doubly linked lists**, where each menu level forms a bidirectional list of items (`next` / `prev`), and submenus are linked through **parent–child relationships** (`parent` / `child`).
 
-Menus are defined in **`menu.h` and `menu.c`**, which can be automatically generated using the **JS Menu Designer** tool. This tool allows you to visually design your menu structure and produces:
+This structure allows for **four-way navigation**:
+* ➡️ `next` — move to the next item on the same level  
+* ⬅️ `prev` — move to the previous item  
+* ⬇️ `child` — enter a submenu  
+* ⬆️ `parent` — return to the upper-level menu  
 
-* Menu item structures (`menu_t`)
-* Constant strings for menu labels
-* Empty callback stubs ready to be implemented
+The library provides a **display driver abstraction layer**, so it can run on:
+* character LCDs (e.g. HD44780),
+* OLED displays,
+* UART/terminal consoles,
+* or any custom screen interface.
 
-> ⚠️ **Important:** The generated files (`menu.h` and `menu.c`) **must be included and linked** in your project for the library to work correctly. You then implement the callback functions for the items that need custom behavior.
+Menus are defined in **`menu.h`** and **`menu.c`**, which can be automatically generated using the **JS Menu Designer** tool.  
+This tool allows visual menu design and produces:
+
+* menu item structures (`menu_t`),
+* constant strings for menu labels,
+* and empty callback stubs ready for implementation.
+
+> ⚠️ **Important:** The generated files (`menu.h` and `menu.c`) **must be included and linked** in your project for the library to function properly.  
+> You then implement the callback functions for items that require custom actions.
 
 ---
 
-## Features ✨
+## ✨ Key Features
 
-* 📂 **Hierarchical Menus** – Multi-level menus, limited only by `MAX_MENU_DEPTH`.
-* 🔄 **Doubly Linked List Based** – Efficient navigation forward and backward between items.
-* ▶️ **Navigation Functions** – `menu_next`, `menu_prev`, `menu_enter`, `menu_esc` for easy cursor control.
-* 🔧 **Callbacks** – Assign a function to each menu item to define custom behavior.
-* 🖥️ **Display Driver Abstraction** – Compatible with any screen via `menu_screen_driver_interface_struct`.
-* 📝 **Flexible Headers** – Default or custom headers for main menus and submenus.
-* 🛡️ **Safe Pointer Handling** – Built-in error checks and status codes (`menu_status_t`).
-* ⚙️ **CI/CD Friendly** – Works with code coverage, complexity analysis, static analysis, and formatting tools.
-* 🧩 **JS Menu Designer Tool Integration** – Generates menu structures and empty callbacks, streamlining development.
+* 📂 **Hierarchical Menus** — Multi-level tree of linked menu lists.  
+* 🔄 **Four-Way Linked Structure** — `next`, `prev`, `child`, and `parent` pointers provide full menu navigation.  
+* ▶️ **Navigation Functions** — Simple API: `menu_next`, `menu_prev`, `menu_enter`, `menu_esc`.  
+* 🔧 **Callback Support** — Each menu item can trigger a custom function.  
+* 🖥️ **Display Driver Abstraction** — Works with any output device via `menu_screen_driver_interface_struct`.  
+* 📝 **Flexible Headers** — Custom or default headers for main menus and submenus.  
+* 🛡️ **Safe Pointer Validation** — Basic runtime validation of pointers and menu depth.  
+* 🧩 **JS Menu Designer Tool Integration** — Visual design and automatic generation of `menu.h` and `menu.c`.  
+* ⚙️ **Portable & Embedded-Friendly** — Pure C99, no dynamic allocation, no external dependencies.
+
+---
+
+## 🧩 Architecture Overview
+
+For a detailed explanation of the internal structure, data flow, and file-level dependencies, see the [Architecture Overview](docs/architecture.md) document.
+
+That document describes:
+- The 4-layer architecture (Application, Menu Definition, Core Engine, Display Driver)
+- Internal data structures (`menu_t`, state variables)
+- Control and rendering flow
+- Display driver interface integration
+- Error handling and design principles
+
+
+poniżej do reworku i przeniesienia do osobnych plików
 
 ## 🚀 Getting Started / Usage
 
