@@ -30,13 +30,13 @@ extern "C"
      */
     typedef enum
     {
-        MENU_OK = 0,                         /**< Operation successful */
-        MENU_ERR_NO_DISPLAY_INTERFACE = 1,   /**< Display driver not initialized or missing */
-        MENU_ERR_INCOMPLETE_INTERFACE = 2,   /**< Display driver missing required function pointers */
-        MENU_ERR_NOT_INITIALIZED = 3,        /**< Menu system not initialized (menu_init() not called) */
-        MENU_ERR_NO_MENU = 4,                /**< Root menu pointer is NULL */
-        MENU_ERR_MENU_TOO_DEEP = 5,          /**< Menu depth exceeds MAX_MENU_DEPTH */
-        MENU_ERR_NULL_MENU_ITEM = 6          /**< Encountered NULL menu item pointer during view update */
+        MENU_OK = 0,                       /**< Operation successful */
+        MENU_ERR_NO_DISPLAY_INTERFACE = 1, /**< Display driver not initialized or missing */
+        MENU_ERR_INCOMPLETE_INTERFACE = 2, /**< Display driver missing required function pointers */
+        MENU_ERR_NOT_INITIALIZED = 3,      /**< Menu system not initialized (menu_init() not called) */
+        MENU_ERR_NO_MENU = 4,              /**< Root menu pointer is NULL */
+        MENU_ERR_MENU_TOO_DEEP = 5,        /**< Menu depth exceeds MAX_MENU_DEPTH */
+        MENU_ERR_NULL_MENU_ITEM = 6        /**< Encountered NULL menu item pointer during view update */
     } menu_status_t;
 
     /**

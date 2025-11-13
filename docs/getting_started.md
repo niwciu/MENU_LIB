@@ -37,7 +37,7 @@ graph TD
 The guide below is based on this example project structure:
 
 ```
-project_root/
+getting_started_example_1/
 ├── hw/
 │   └── Nucleo_STM32G071RB_LL/              # CubeMX project with HW configuration
 │       ├── Core/
@@ -51,11 +51,7 @@ project_root/
 │       └── CMakeLists.txt
 ├── lib/
 │   ├── MENU_LIB/
-│   │   ├── CMakeLists.txt
-│   │   ├── menu_lib.c
-│   │   ├── menu_lib.h
-│   │   ├── menu_lib_type.h
-│   │   └── menu_screen_driver_interface.h
+│   │   └── CMakeLists.txt                  
 │   ├── LCD_HD44780/                        # Configured and integrated library
 │   │   ├── CMakeLists.txt
 │   │   ├── lcd_hd44780.c
@@ -67,17 +63,14 @@ project_root/
 │       ├── pushbutton.c
 │       ├── pushbutton.h
 │       └── pushbutton_GPIO_interface.h
-├── src/
-│   ├── UI/
-│   │   ├── keypad.c                        # ← created in Step 2
-│   │   ├── keypad.h                        # ← created in Step 2
-│   │   ├── menu.c                          # ← created in Step 3
-│   │   ├── menu.h                          # ← created in Step 3
-│   │   ├── menu_screen_driver_interface.c  # ← created in Step 1
-│   ├── main.c
-│   ├── pushbutton_GPIO_interface.c
-│   └── menu_config.c / menu_config.h
-└── CMakeLists.txt  # project configuration
+└── src/
+    ├── ui/
+    │   ├── keypad.c                        # ← created in Step 2
+    │   ├── keypad.h                        # ← created in Step 2
+    │   ├── menu.c                          # ← created in Step 3
+    │   ├── menu.h                          # ← created in Step 3
+    │   └── menu_screen_driver_interface.c  # ← created in Step 1
+    └── main_app.c
 ```
 
 You may keep libraries anywhere in your tree, but make sure they are **added to the build**, either via:
@@ -164,7 +157,6 @@ void set_UI_main_app_scr(void); // draw default app screen (label/info)
 #ifdef __cplusplus
 }
 #endif
-
 #endif /* UI_KEYPAD_H_ */
 ```
 
@@ -373,8 +365,8 @@ Create (or update) your application entry file to initialize the UI. In this bas
 
 ```c
 #include "menu_lib.h"
-#include "UI/menu.h"          // generated in Step 3
-#include "UI/keypad.h"        // created in Step 2
+#include "menu.h"          // generated in Step 3
+#include "keypad.h"        // created in Step 2
 #include "lcd_hd44780.h"      // for lcd_update() when buffering is ON
 #include "lcd_hd44780_config.h"
 
@@ -395,10 +387,8 @@ int main(void)
         // Process debounced buttons; drives MENU_LIB when in menu mode
         keypad_process();
 
-#if (LCD_BUFFERING == ON)
         // Keep the display refreshed when buffering is enabled
         lcd_update();
-#endif
     }
 }
 ```
@@ -627,7 +617,7 @@ For the example project, all sources are listed in the main `CMakeLists.txt`.
 
 Open a terminal in the example’s main folder (where the main `CMakeLists.txt` is stored):
 
-**Makefiles**
+=== **Makefiles**
 
 ```bash
 cmake -S . -B out -G "Unix Makefiles"
@@ -635,7 +625,7 @@ cd out
 make all
 ```
 
-**Ninja**
+=== **Ninja**
 
 ```bash
 cmake -S . -B out -G "Ninja"
