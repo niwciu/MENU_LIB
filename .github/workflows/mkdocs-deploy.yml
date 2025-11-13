@@ -50,8 +50,8 @@ jobs:
       - name: Copy README.md to docs/
         run:  cp README.md docs/README.md
 
-      - name: Copy examples README.md to docs/
-        run:  cp ./examples/README.md docs/examples/README.md
+      # - name: Copy examples README.md to docs/
+      #   run:  cp ./examples/README.md docs/examples/README.md
 
       # Only if doxygen doc generating
       # - name: Generate Doxygen html doc
