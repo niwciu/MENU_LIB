@@ -22,7 +22,7 @@ It separates **menu logic**, **display rendering**, and **menu data structures**
 ## 🧩 Architecture Overview
 
 For an in-depth explanation of internal structure, data flow, and design principles, see the
-👉 **[Architecture Overview](https://niwciu.github.io/MENU_LIB/architecture.md)** document.
+👉 **[Architecture Overview](https://niwciu.github.io/MENU_LIB/architecture)** document.
 
 That document covers:
 
@@ -39,17 +39,17 @@ That document covers:
 For detailed instructions on how to set up and use the library — including display driver configuration, menu definition, and initialization steps —
 please refer to:
 
-* 👉 [Getting Started Guide](https://niwciu.github.io/MENU_LIB/getting_started.md)
-* 👉 [Menu Generator Tool](https://niwciu.github.io/MENU_LIB/menu_generator.md) — optional web-based tool for visually designing menus and generating compatible `menu.c` / `menu.h` files
+* 👉 [Getting Started Guide](https://niwciu.github.io/MENU_LIB/getting_started)
+* 👉 [Menu Generator Tool](https://niwciu.github.io/MENU_LIB/menu_generator) — optional web-based tool for visually designing menus and generating compatible `menu.c` / `menu.h` files
 
 ---
 
 ## 🧩 Examples
 
-Ready-to-run examples can be found in the [examples/](examples/) directory.
+Ready-to-run examples can be found in the [examples/](https://github.com/niwciu/MENU_LIB/tree/main/examples) directory.
 Each example demonstrates a different use case (LCD display, UART terminal, FreeRTOS integration, etc.).
 
-More details in 👉 [Examples Overview](https://niwciu.github.io/MENU_LIB/examples.md)
+More details in 👉 [Examples Overview](https://niwciu.github.io/MENU_LIB/examples)
 
 ---
 
@@ -76,7 +76,7 @@ After successful build and test runs, the following reports are published to the
 * **GCOVR Coverage Report** — unit test coverage summary
 * **Doxygen Documentation** — automatically generated API reference
 
-📄 See also: [Reports](https://niwciu.github.io/MENU_LIB/reports.md)
+📄 See also: [Reports](https://niwciu.github.io/MENU_LIB/reports)
 
 ---
 
@@ -89,14 +89,14 @@ and published on the project page:
 
 An additional API reference is also available in Markdown format:
 
-👉 [API Reference (Markdown)](https://niwciu.github.io/MENU_LIB/api_reference.md)
+👉 [API Reference (Markdown)](https://niwciu.github.io/MENU_LIB/api_reference)
 
 ---
 
 ## 👨‍💻 Contributing
 
 Contributions, ideas, and improvements are welcome!
-Please read the [CONTRIBUTING.md](https://niwciu.github.io/MENU_LIB/CONTRIBUTING.md) guide before submitting pull requests.
+Please read the [CONTRIBUTING](https://niwciu.github.io/MENU_LIB/CONTRIBUTING) guide before submitting pull requests.
 It includes:
 
 * Build & test instructions
@@ -109,7 +109,7 @@ It includes:
 ## 📄 License
 
 This project is released under the **MIT License**.
-See the [LICENSE](LICENSE) file for details.
+See the [LICENSE](https://github.com/niwciu/MENU_LIB/blob/main/LICENSE) file for details.
 
 ---
 

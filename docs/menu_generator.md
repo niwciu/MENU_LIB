@@ -63,9 +63,9 @@ It generates ready-to-use `menu.c` and `menu.h` files compatible with the `menu_
 ---
 
 ## 📘 Related Documentation
-- [Getting Started Guide](docs/getting_started.md)  
-- [Architecture Overview](docs/architecture.md)  
-- [API Reference](docs/api_reference.md)
+- [Getting Started Guide](https://niwciu.github.io/MENU_LIB/getting_started.md)  
+- [Architecture Overview](https://niwciu.github.io/MENU_LIB/architecture.md)  
+- [API Reference](https://niwciu.github.io/MENU_LIB/api_reference.md)
 
 ---
 

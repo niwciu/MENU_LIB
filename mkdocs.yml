@@ -1,7 +1,7 @@
-site_name: OBSERVER Embedded C Library
-site_description: Automatycznie generowana z README.md + raporty
-site_url: https://niwciu.github.io/OBSERVER/
-repo_url: https://github.com/niwciu/OBSERVER
+site_name: MENU_LIB Hierarchical Menu C Library for Embedded Systems
+site_description: Generated Automatically form README.md
+site_url: https://niwciu.github.io/MENU_LIB/
+repo_url: https://github.com/niwciu/MENU_LIB
 
 
 theme:
@@ -70,12 +70,12 @@ nav:
   - Examples Info: examples.md
   - Reports: reports.md
   - Contributing: CONTRIBUTING.md
-  - Doxygen docu: doxygen/observer_lib_doc/html/index.html
+  # - Doxygen docu: doxygen/MENU_LIB_lib_doc/html/index.html
 
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/niwciu/OBSERVER
+      link: https://github.com/niwciu/MENU_LIB
     - icon: fontawesome/solid/envelope
       link: mailto:niwciu@gmail.com
     - icon: simple/youtube
