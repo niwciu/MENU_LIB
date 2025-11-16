@@ -63,8 +63,13 @@ markdown_extensions:
 
 nav:
   - Home: README.md
-  - Examples info: examples/README.md
+  - Architecture: architecture.md
+  - Api Reference: api_reference.md
+  - Getting Started: getting_started.md
+  - Menu Generator: menu_generator.md
+  - Examples Info: examples.md
   - Reports: reports.md
+  - Contributing: CONTRIBUTING.md
   - Doxygen docu: doxygen/observer_lib_doc/html/index.html
 
 extra:
