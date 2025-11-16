@@ -85,6 +85,13 @@ TEST(menu_lib_init, WhenMenuInitThenReturnOk)
     TEST_ASSERT_EQUAL(DISPLAY->get_number_of_screen_lines(), menu_number_of_screen_lines);
 }
 
+TEST(menu_lib_init, GivenMockMenuScreenInitStatusEqualMenuScreenInitUnknownWhenInitWithValidDisplayThenMockScreenInitStatusEqualMenuScreenInitOk)
+{
+    mock_menu_screen_init_status = MENU_SCREEN_INIT_UNKNOWN;
+    menu_init();
+    TEST_ASSERT_EQUAL_MESSAGE(MENU_SCREEN_INIT_OK, mock_menu_screen_init_status, "menu screen not initialized during menu_init()");
+}
+
 TEST(menu_lib_init, WhenInitWithValidDisplayThenReturnOk)
 {
     menu_status_t status = menu_init();

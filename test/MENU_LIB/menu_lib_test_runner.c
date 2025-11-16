@@ -14,6 +14,7 @@ TEST_GROUP_RUNNER(menu_lib_init)
     RUN_TEST_CASE(menu_lib_init, WhenMenuViewInitWithValidMenuThenReturnOk);
 
     RUN_TEST_CASE(menu_lib_init, WhenInitWithValidDisplayThenReturnOk);
+    RUN_TEST_CASE(menu_lib_init, GivenMockMenuScreenInitStatusEqualMenuScreenInitUnknownWhenInitWithValidDisplayThenMockScreenInitStatusEqualMenuScreenInitOk); 
     RUN_TEST_CASE(menu_lib_init, WhenInitWithNullDisplayThenReturnNoDisplayInterface);
     RUN_TEST_CASE(menu_lib_init, WhenInitWithIncompleteDisplayThenReturnIncompleteInterface);
 }
