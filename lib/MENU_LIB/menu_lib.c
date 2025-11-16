@@ -103,6 +103,7 @@ menu_status_t menu_init(void)
     {
         menu_number_of_chars_per_line = DISPLAY->get_number_of_chars_per_line();
         menu_number_of_screen_lines = DISPLAY->get_number_of_screen_lines();
+        DISPLAY->screen_init();
     }
 
     menu_initialized = (status == MENU_OK);
