@@ -5,8 +5,7 @@
  * @date 2025-11-02
  */
 #include "menu.h"
-#include "keypad.h"
-#include "lcd_hd44780.h"
+#include "menu_handlers.h"
 #include <stddef.h>
 
 static void info_cb(void);
@@ -26,30 +25,26 @@ menu_t menu_3_2 = {"Stop", NULL, &menu_3_1, NULL, &menu_3, stop_cb};
 menu_t menu_4 = {"About", NULL, &menu_3, NULL, NULL, about_cb};
 
 static void info_cb(void)
-{ /* TODO: implement */
-    set_info_keypad_functionality();
-    // show info screen
-    lcd_buf_cls();
-    lcd_buf_locate(LINE_1,C9);
-    lcd_buf_str("INFO");
-    lcd_buf_locate(LINE_2,C4);
-    lcd_buf_str("screen content");
-    lcd_buf_locate(LINE_4,C2);
-    lcd_buf_str("press ESC to exit.");
-
+{
+    info_enter_cb();
 }
 static void lcd_brightness_cb(void)
-{ /* TODO: implement */
+{
+    lcd_brightness_enter_cb();
 }
 static void sound_cb(void)
-{ /* TODO: implement */
+{
+    sound_enter_cb();
 }
 static void start_cb(void)
-{ /* TODO: implement */
+{
+    start_enter_cb();
 }
 static void stop_cb(void)
-{ /* TODO: implement */
+{
+    stop_enter_cb();
 }
 static void about_cb(void)
-{ /* TODO: implement */
+{
+    about_enter_cb();
 }

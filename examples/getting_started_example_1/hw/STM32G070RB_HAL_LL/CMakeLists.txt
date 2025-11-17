@@ -59,7 +59,9 @@ set(C_SRCS
 
     ../../src/main_app.c
 
+    ../../src/ui/ui.c
     ../../src/ui/menu.c
+    ../../src/ui/menu_handlers.c
     ../../src/ui/keypad.c
     ../../src/ui/menu_screen_driver_interface.c
 

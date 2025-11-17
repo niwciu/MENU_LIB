@@ -1,11 +1,12 @@
 # 🚀 Getting Started with MENU_LIB
 
-This guide demonstrates how to integrate **MENU_LIB** into a complete embedded application, using:
+This guide explains how to integrate **MENU_LIB** into a complete embedded application using:
 
-* [**LCD_HD44780**](https://github.com/niwciu/LCD_HD44780) — the **display driver** responsible for text rendering, and
-* [**PUSHBUTTON_SWITCH_LIB**](https://github.com/niwciu/PUSHBUTTON_SWITCH_LIB.git) — the **user input interface** providing debounced button handling.
+* [**LCD_HD44780**](https://github.com/niwciu/LCD_HD44780) — the display driver responsible for rendering text  
+* [**PUSHBUTTON_SWITCH_LIB**](https://github.com/niwciu/PUSHBUTTON_SWITCH_LIB.git) — the input layer providing debounced pushbutton handling
 
-We will build a small hierarchical menu displayed on a **20×4 character LCD**, operated by four pushbuttons (**UP**, **DOWN**, **ENTER**, **ESC**). Step by step, you’ll connect display, input, and menu logic into a single functional embedded UI layer.
+In this example, we will build a small hierarchical menu displayed on a **20×4 character LCD** and controlled by four pushbuttons (**UP**, **DOWN**, **ENTER**, **ESC**).  
+Step by step, you will connect the display, keypad, and menu logic into a single functional embedded UI layer.
 
 A ready-to-build reference example is available in the [`examples/`](../examples) directory.
 
@@ -13,17 +14,18 @@ For detailed hardware configuration, wiring, and library-specific setup, refer t
 
 > ❗️⚠️ **Assumptions** ⚠️❗️
 >
-> In this tutorial, both **LCD_HD44780** and **PUSHBUTTON_SWITCH_LIB** are already correctly **configured, initialized, and verified to work independently** on your hardware.
-> The goal is to show how to integrate **MENU_LIB** on top of these lower-level libraries to create a complete menu system.
-> 
-> In case if you are not familier with **LCD_HD44780** and **PUSHBUTTON_SWITCH_LIB** start from running those library first.
-> Libraries home pages:
-> * [LCD_HD44780 Documentation](https://niwciu.github.io/LCD_HD44780/)
-> * [PUSHBUTTON_SWITCH_LIB Documentation](https://niwciu.github.io/PUSHBUTTON_SWITCH_LIB/)
+> This tutorial assumes that both **LCD_HD44780** and **PUSHBUTTON_SWITCH_LIB** are already correctly  
+> configured, initialized, and verified to work independently on your hardware.  
+> The purpose of this guide is to show how to integrate **MENU_LIB** on top of these libraries to build a complete menu system.
 >
-> For hardware used in the examples, see **[Examples Overview](examples.md)**.
+> If you are not yet familiar with **LCD_HD44780** or **PUSHBUTTON_SWITCH_LIB**, start by running those libraries first:  
+> * [LCD_HD44780 Documentation](https://niwciu.github.io/LCD_HD44780/)  
+> * [PUSHBUTTON_SWITCH_LIB Documentation](https://niwciu.github.io/PUSHBUTTON_SWITCH_LIB/)  
+>
+> For information about the hardware used in the examples, see **[Examples Overview](examples.md)**.
 
 ---
+
 
 ## 🧱 Project Structure Overview
 
@@ -82,23 +84,26 @@ getting_started_example_1/
     └── main_app.c
 ```
 
-You may keep libraries anywhere in your tree, but make sure they are **added to the build**, either via:
+You may keep the libraries anywhere in your project tree, but make sure they are **included in the build system**, either via:
 
-* `CMakeLists.txt`,
-* `Makefile`, or
-* IDE settings (e.g., STM32CubeIDE).
+* `CMakeLists.txt`
+* a `Makefile`, or
+* your IDE configuration (e.g., STM32CubeIDE)
 
-After creating new source files (e.g., `menu_screen_driver_interface.c`), add them to the build configuration.
+Whenever you create new source files (for example, `menu_screen_driver_interface.c`), remember to add them to the build configuration so they are compiled and linked into the project.
+
 
 ---
 
 ## 🚟️ Step 1 — Integrate the Display Driver
 
-Assuming **LCD_HD44780** is added and configured (including its GPIO driver), create:
+After adding and configuring **LCD_HD44780** (including its GPIO interface), create the file:
 
-> `src/ui/menu_screen_driver_interface.c`
+`src/ui/menu_screen_driver_interface.c`
 
-Include driver headers and connect them to `menu_screen_driver_interface_struct`. Implement the accessor `get_menu_display_driver_interface()`.
+In this file, include the LCD driver headers and connect them to the  
+`menu_screen_driver_interface_struct`. Then implement the accessor  
+`get_menu_display_driver_interface()` required by **MENU_LIB**.
 
 ```c
 #include "lcd_hd44780.h"
@@ -140,20 +145,22 @@ const struct menu_screen_driver_interface_struct *get_menu_display_driver_interf
 ### 🧠 Explanation
 
 * `LCD_X` and `LCD_Y` come from `lcd_hd44780_config.h` based on the selected LCD type.
-* `get_menu_display_driver_interface()` gives **MENU_LIB** a stable way to access the display driver.
-* This keeps hardware abstraction clean and lets you change the LCD driver later without touching menu logic.
+* `get_menu_display_driver_interface()` provides **MENU_LIB** with a stable access point to the display driver.
+* This keeps the hardware abstraction clean and allows you to change the LCD driver later without modifying any menu logic.
 
-That’s it for the display driver interface. Save and close — other modules will be initialized later.
+That’s it for the display driver interface. Save the file and continue — the remaining UI modules will be initialized in later steps.
+
 
 ---
 
 ## 🎛️ Step 2 — Create the Keypad Layer (UI)
 
-Create a thin keypad layer that maps **PUSHBUTTON_SWITCH_LIB** events to **MENU_LIB** navigation using the buttons you defined, and also allows you to control keypad behavior for menu items that require custom functionality.
+Create a thin keypad layer that maps **PUSHBUTTON_SWITCH_LIB** events to **MENU_LIB** navigation using the defined buttons.  
+This layer also allows you to customize keypad behavior for menu items that require their own input handling.
 
-Add:
+Add the following files:
 
-> `src/ui/keypad.h` and `src/ui/keypad.c`
+`src/ui/keypad.h` and `src/ui/keypad.c`
 
 ### `keypad.h`
 
@@ -246,8 +253,9 @@ void disable_keypad_up_down_repetition(void)
 }
 ```
 
-### Trigger `update_keypad_debounce_timers()` periodically every 1 ms - MANDATORY
-For example, use your SysTick timer to handle this (assuming that your SysTick is running and its interrupt is enabled):
+### Trigger `update_keypad_debounce_timers()` every 1 ms (MANDATORY)
+
+For example, use the SysTick timer (assuming it is enabled):
 
 ``` C
 /**
@@ -260,9 +268,9 @@ void SysTick_Handler(void)
 ```
 **Notes**
 
-* This assumes `pushbutton_GPIO_interface.c` provides `PB_get_driver_interface()`.
-* Make sure to add `keypad.c` to your build system (CMake/Makefile/IDE).
-* `update_keypad_debounce_timers()` updates all keypad debounce timers, and according to the **PUSHBUTTON_LIB** documentation, it must be called every 1 ms.
+* This assumes that `pushbutton_GPIO_interface.c` provides `PB_get_driver_interface()`.
+* Ensure that `keypad.c` is added to your build system (CMake/Makefile/IDE).
+* `update_keypad_debounce_timers()` updates all keypad debounce timers and must be called every 1 ms according to the **PUSHBUTTON_SWITCH_LIB** documentation.
 
 ---
 

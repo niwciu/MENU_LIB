@@ -10,10 +10,6 @@
  */
 #include "keypad.h"
 #include "pushbutton.h"
-#include "menu_lib.h"
-#include "lcd_hd44780.h"
-#include "lcd_hd44780_config.h"
-#include "menu.h"               // generated in Step 3
 
 #include <stdio.h>
 
@@ -23,14 +19,7 @@ static PUSHBUTTON_TypDef btn_down;
 static PUSHBUTTON_TypDef btn_enter;
 static PUSHBUTTON_TypDef btn_esc;
 
-// Forward declarations
-static void on_menu_enter(void);
-static void on_menu_exit(void);
-static void keypad_bind_menu_controls(void);
-static void keypad_bind_main_app_controls(void);
 
-// menu keypad info functions
-static void info_menu_exit(void);
 
 void keypad_init(void)
 {
@@ -39,8 +28,6 @@ void keypad_init(void)
     init_pushbutton(&btn_down,  REPETITION_OFF, TRIGGER_ON_PUSH, PB_down_driver_interface_get);
     init_pushbutton(&btn_enter, REPETITION_OFF, TRIGGER_ON_PUSH, PB_enter_driver_interface_get);
     init_pushbutton(&btn_esc,   REPETITION_OFF, TRIGGER_ON_PUSH, PB_esc_driver_interface_get);
-
-    keypad_bind_main_app_controls();
 }
 
 void keypad_process(void)
@@ -52,15 +39,7 @@ void keypad_process(void)
     check_pushbutton(&btn_esc);
 }
 
-void set_UI_main_app_scr(void)
-{
-    lcd_buf_locate(LINE_2, C6);
-    lcd_buf_str("Example  1");
-    lcd_buf_locate(LINE_3, C3);
-    lcd_buf_str("Main App. Screen");
-}
-
-void update_keypad_repetition_counters(void)
+void update_keypad_debounce_timers(void)
 {
     dec_pushbutton_deb_rep_timer(&btn_up);
     dec_pushbutton_deb_rep_timer(&btn_down);
@@ -69,51 +48,20 @@ void update_keypad_repetition_counters(void)
 
 }
 
-void set_info_keypad_functionality(void)
+void keypad_bind_conrtol_handlers( key_action_cb on_up, key_action_cb on_down, key_action_cb on_enter, key_action_cb on_esc)
 {
-    register_button_push_callback(&btn_up,    NULL);
-    register_button_push_callback(&btn_down,  NULL);
-    register_button_push_callback(&btn_enter, NULL);
-    register_button_push_callback(&btn_esc,   info_menu_exit);
+    register_button_push_callback(&btn_up,    on_up);
+    register_button_push_callback(&btn_down,  on_down);
+    register_button_push_callback(&btn_enter, on_enter);
+    register_button_push_callback(&btn_esc,   on_esc);
 }
-
-static void on_menu_enter(void)
+void enable_keypad_up_down_repetition(void)
 {
-    // Start menu view at top-level; default header (NULL)
-    // Root pointer is the first top-level item (menu_1) from the generator
-    menu_view_init(&menu_1, on_menu_exit, NULL);
-    keypad_bind_menu_controls();
+    enable_pusbutton_repetition(&btn_up);
+    enable_pusbutton_repetition(&btn_down);
 }
-
-static void on_menu_exit(void)
+void disable_keypad_up_down_repetition(void)
 {
-    lcd_buf_cls();
-    keypad_bind_main_app_controls();
-    set_UI_main_app_scr();
+    disable_pusbutton_repetition(&btn_up);
+    disable_pusbutton_repetition(&btn_down);
 }
-
-static void keypad_bind_menu_controls(void)
-{
-    // UP -> previous item, DOWN -> next item
-    register_button_push_callback(&btn_up,    menu_prev);
-    register_button_push_callback(&btn_down,  menu_next);
-    register_button_push_callback(&btn_enter, menu_enter);
-    register_button_push_callback(&btn_esc,   menu_esc);
-}
-
-static void keypad_bind_main_app_controls(void)
-{
-    // Main app mode: only ENTER enters the menu
-    register_button_push_callback(&btn_up,    NULL);
-    register_button_push_callback(&btn_down,  NULL);
-    register_button_push_callback(&btn_enter, on_menu_enter);
-    register_button_push_callback(&btn_esc,   NULL);
-}
-
-static void info_menu_exit(void)
-{
-    keypad_bind_menu_controls();
-    update_screen_view();
-}
-
-// menu keypad info functions
