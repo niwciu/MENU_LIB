@@ -69,7 +69,6 @@ static void clear_current_menu_view_with_cursor(void);
 static void update_menu_item_pointer_to_print(void);
 static void update_current_menu_view_with_cursor(void);
 static void display_cursor_marker_if_needed(uint8_t row);
-// static void display_error_line(uint8_t row, const char *msg);
 static void display_menu_item_name(uint8_t row, const char *name);
 
 /* --- Implementation --- */
@@ -504,18 +503,6 @@ static void display_cursor_marker_if_needed(uint8_t row)
     if (row == (cursor_row_position[menu_level] + MENU_VIEW_FIRST_ROW))
         DISPLAY->print_char('>');
 }
-
-/**
- * @brief Display an error message at the given row.
- *
- * @param row Screen row to display error
- * @param msg Error message string
- */
-// static void display_error_line(uint8_t row, const char *msg)
-// {
-//     DISPLAY->cursor_position(row, STRING_START_POSITION);
-//     DISPLAY->print_string(msg);
-// }
 
 /**
  * @brief Display the name of a menu item at the given row.

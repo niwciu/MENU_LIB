@@ -5,6 +5,8 @@
  * @date 2025-11-02
  */
 #include "menu.h"
+#include "keypad.h"
+#include "lcd_hd44780.h"
 #include <stddef.h>
 
 static void info_cb(void);
@@ -25,6 +27,16 @@ menu_t menu_4 = {"About", NULL, &menu_3, NULL, NULL, about_cb};
 
 static void info_cb(void)
 { /* TODO: implement */
+    set_info_keypad_functionality();
+    // show info screen
+    lcd_buf_cls();
+    lcd_buf_locate(LINE_1,C9);
+    lcd_buf_str("INFO");
+    lcd_buf_locate(LINE_2,C4);
+    lcd_buf_str("screen content");
+    lcd_buf_locate(LINE_4,C2);
+    lcd_buf_str("press ESC to exit.");
+
 }
 static void lcd_brightness_cb(void)
 { /* TODO: implement */

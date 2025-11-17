@@ -29,6 +29,8 @@ static void on_menu_exit(void);
 static void keypad_bind_menu_controls(void);
 static void keypad_bind_main_app_controls(void);
 
+static void info_menu_exit(void);
+
 void keypad_init(void)
 {
     // All buttons: trigger on push, no repetition
@@ -53,8 +55,8 @@ void set_UI_main_app_scr(void)
 {
     lcd_buf_locate(LINE_2, C6);
     lcd_buf_str("Example  1");
-    lcd_buf_locate(LINE_3, C5);
-    lcd_buf_str("default mode");
+    lcd_buf_locate(LINE_3, C3);
+    lcd_buf_str("Main App. Screen");
 }
 
 void update_keypad_repetition_counters(void)
@@ -64,6 +66,14 @@ void update_keypad_repetition_counters(void)
     dec_pushbutton_deb_rep_timer(&btn_enter);
     dec_pushbutton_deb_rep_timer(&btn_esc);
 
+}
+
+void set_info_keypad_functionality(void)
+{
+    register_button_push_callback(&btn_up,    NULL);
+    register_button_push_callback(&btn_down,  NULL);
+    register_button_push_callback(&btn_enter, NULL);
+    register_button_push_callback(&btn_esc,   info_menu_exit);
 }
 
 static void on_menu_enter(void)
@@ -97,4 +107,10 @@ static void keypad_bind_main_app_controls(void)
     register_button_push_callback(&btn_down,  NULL);
     register_button_push_callback(&btn_enter, on_menu_enter);
     register_button_push_callback(&btn_esc,   NULL);
+}
+
+static void info_menu_exit(void)
+{
+    keypad_bind_menu_controls();
+    update_screen_view();
 }
