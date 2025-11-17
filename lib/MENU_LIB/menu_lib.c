@@ -483,7 +483,7 @@ static void update_current_menu_view_with_cursor(void)
 
         if (menu_item_2_print == NULL)
         {
-            // Null -> no more items to print on lcd 
+            // Null -> no more items to print on lcd
             break;
         }
 
