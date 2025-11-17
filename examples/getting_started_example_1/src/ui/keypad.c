@@ -29,6 +29,7 @@ static void on_menu_exit(void);
 static void keypad_bind_menu_controls(void);
 static void keypad_bind_main_app_controls(void);
 
+// menu keypad info functions
 static void info_menu_exit(void);
 
 void keypad_init(void)
@@ -114,3 +115,5 @@ static void info_menu_exit(void)
     keypad_bind_menu_controls();
     update_screen_view();
 }
+
+// menu keypad info functions

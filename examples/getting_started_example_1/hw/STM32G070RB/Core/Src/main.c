@@ -34,11 +34,3 @@ int main(void)
   /* Loop forever */
 	for(;;);
 }
-
-
-void HardFault_Handler(void)
-{
-    static int a;
-    a=a+1;
-    for(;;);
-}

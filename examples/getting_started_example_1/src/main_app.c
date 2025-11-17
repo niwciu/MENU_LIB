@@ -39,7 +39,3 @@ void main_app(void)
     }
 }
 
-void SysTick_Handler(void)
-{
-    update_keypad_repetition_counters();
-}

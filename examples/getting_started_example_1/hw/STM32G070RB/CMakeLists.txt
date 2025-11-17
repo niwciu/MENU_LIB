@@ -50,6 +50,7 @@ set(C_SRCS
     Core/Src/syscalls.c
     Core/Src/sysmem.c
     Core/Src/core_init.c
+    Core/Src/stm32g0xx_it.c
     Core/Src/pushbutton_GPIO_interface.c
     Core/Src/lcd_hd44780_GPIO_interface.c
     Core/Src/tim_delay.c
