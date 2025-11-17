@@ -62,7 +62,8 @@
     "time.h": "c",
     "signal.h": "c",
     "menu_screen_driver_interface.h": "c",
-    "pushbutton_gpio_interface.h": "c"
+    "pushbutton_gpio_interface.h": "c",
+    "main_app.h": "c"
   },
   "C_Cpp.errorSquiggles": "disabled",
   "cmake.sourceDirectory": "D:/EMBEDDED/PROJECT_TEMPLATES/Embeded_Project_Template/hw/ATMEGA328P_ARDUINO_UNO_R3"

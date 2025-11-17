@@ -31,6 +31,14 @@ int main(void)
 
   main_app();
 
-    /* Loop forever */
+  /* Loop forever */
 	for(;;);
+}
+
+
+void HardFault_Handler(void)
+{
+    static int a;
+    a=a+1;
+    for(;;);
 }

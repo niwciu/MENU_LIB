@@ -53,8 +53,17 @@ void set_UI_main_app_scr(void)
 {
     lcd_buf_locate(LINE_2, C6);
     lcd_buf_str("Example  1");
-    lcd_buf_locate(LINE_3, C4);
+    lcd_buf_locate(LINE_3, C5);
     lcd_buf_str("default mode");
+}
+
+void update_keypad_repetition_counters(void)
+{
+    dec_pushbutton_deb_rep_timer(&btn_up);
+    dec_pushbutton_deb_rep_timer(&btn_down);
+    dec_pushbutton_deb_rep_timer(&btn_enter);
+    dec_pushbutton_deb_rep_timer(&btn_esc);
+
 }
 
 static void on_menu_enter(void)
@@ -67,7 +76,7 @@ static void on_menu_enter(void)
 
 static void on_menu_exit(void)
 {
-    lcd_cls();
+    lcd_buf_cls();
     keypad_bind_main_app_controls();
     set_UI_main_app_scr();
 }

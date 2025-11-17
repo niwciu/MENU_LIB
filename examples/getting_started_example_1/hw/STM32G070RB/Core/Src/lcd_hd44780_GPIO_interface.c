@@ -10,8 +10,9 @@
  */
 
 #include <stdio.h>
-#include "stm32g071xx.h"
+#include "stm32g070xx.h"
 #include "lcd_hd44780_GPIO_interface.h"
+#include "lcd_hd44780_config.h"
 #include "tim_delay.h"
 
 
@@ -20,61 +21,61 @@
 #define OFF  0
 
 /*********************************Define hardware connection in your project*******************************/
-#define LCD_D7_PORT         GPIOA
-#define LCD_D6_PORT         GPIOB
-#define LCD_D5_PORT         GPIOB
-#define LCD_D4_PORT         GPIOB
-#define LCD_RS_PORT         GPIOA
-#define LCD_E_PORT          GPIOC
-#define LCD_BCKL_PORT       GPIOB
+#define LCD_D7_PORT         GPIOD
+#define LCD_D6_PORT         GPIOD
+#define LCD_D5_PORT         GPIOD
+#define LCD_D4_PORT         GPIOD
+#define LCD_RS_PORT         GPIOB
+#define LCD_E_PORT          GPIOB
+#define LCD_BCKL_PORT       GPIOC
 #if USE_RW_PIN == ON
-#define LCD_RW_PORT          GPIOC
+#define LCD_RW_PORT          GPIOB
 #endif
 
-#define LCD_D7_PORT_CLK_EN      RCC_IOPENR_GPIOAEN
-#define LCD_D6_PORT_CLK_EN      RCC_IOPENR_GPIOBEN
-#define LCD_D5_PORT_CLK_EN      RCC_IOPENR_GPIOBEN
-#define LCD_D4_PORT_CLK_EN      RCC_IOPENR_GPIOBEN
-#define LCD_RS_PORT_CLK_EN      RCC_IOPENR_GPIOAEN
-#define LCD_E_PORT_CLK_EN       RCC_IOPENR_GPIOCEN
-#define LCD_BCKL_PORT_CLK_EN    RCC_IOPENR_GPIOBEN
+#define LCD_D7_PORT_CLK_EN      RCC_IOPENR_GPIODEN
+#define LCD_D6_PORT_CLK_EN      RCC_IOPENR_GPIODEN
+#define LCD_D5_PORT_CLK_EN      RCC_IOPENR_GPIODEN
+#define LCD_D4_PORT_CLK_EN      RCC_IOPENR_GPIODEN
+#define LCD_RS_PORT_CLK_EN      RCC_IOPENR_GPIOBEN
+#define LCD_E_PORT_CLK_EN       RCC_IOPENR_GPIOBEN
+#define LCD_BCKL_PORT_CLK_EN    RCC_IOPENR_GPIOCEN
 #if USE_RW_PIN == ON
-#define LCD_RW_PORT_CLK_EN      RCC_IOPENR_GPIOCEN
+#define LCD_RW_PORT_CLK_EN      RCC_IOPENR_GPIOBEN
 #endif
 
-#define LCD_D7_OUT_PIN      GPIO_ODR_OD8
-#define LCD_D6_OUT_PIN      GPIO_ODR_OD14
-#define LCD_D5_OUT_PIN      GPIO_ODR_OD4
-#define LCD_D4_OUT_PIN      GPIO_ODR_OD5
-#define LCD_RS_OUT_PIN      GPIO_ODR_OD9
-#define LCD_E_OUT_PIN       GPIO_ODR_OD7
-#define LCD_BCKL_OUT_PIN    GPIO_ODR_OD0
+#define LCD_D7_OUT_PIN      GPIO_ODR_OD3
+#define LCD_D6_OUT_PIN      GPIO_ODR_OD2
+#define LCD_D5_OUT_PIN      GPIO_ODR_OD1
+#define LCD_D4_OUT_PIN      GPIO_ODR_OD0
+#define LCD_RS_OUT_PIN      GPIO_ODR_OD13
+#define LCD_E_OUT_PIN       GPIO_ODR_OD15
+#define LCD_BCKL_OUT_PIN    GPIO_ODR_OD7
 #if USE_RW_PIN == ON
-#define LCD_E_OUT_PIN       GPIO_ODR_OD7
+#define LCD_RW_OUT_PIN       GPIO_ODR_OD14
 #endif
 
-#define LCD_D7_IN_PIN       GPIO_IDR_ID8
-#define LCD_D6_IN_PIN       GPIO_IDR_ID14
-#define LCD_D5_IN_PIN       GPIO_IDR_ID4
-#define LCD_D4_IN_PIN       GPIO_IDR_ID5
+#define LCD_D7_IN_PIN       GPIO_IDR_ID3
+#define LCD_D6_IN_PIN       GPIO_IDR_ID2
+#define LCD_D5_IN_PIN       GPIO_IDR_ID1
+#define LCD_D4_IN_PIN       GPIO_IDR_ID0
 
-#define MODER_LCD_D7_0      GPIO_MODER_MODE8_0
-#define MODER_LCD_D7_Msk    GPIO_MODER_MODE8_Msk
-#define MODER_LCD_D6_0      GPIO_MODER_MODE14_0
-#define MODER_LCD_D6_Msk    GPIO_MODER_MODE14_Msk
-#define MODER_LCD_D5_0      GPIO_MODER_MODE4_0
-#define MODER_LCD_D5_Msk    GPIO_MODER_MODE4_Msk
-#define MODER_LCD_D4_0      GPIO_MODER_MODE5_0
-#define MODER_LCD_D4_Msk    GPIO_MODER_MODE5_Msk
-#define MODER_LCD_RS_0      GPIO_MODER_MODE9_0
-#define MODER_LCD_RS_Msk    GPIO_MODER_MODE9_Msk
-#define MODER_LCD_E_0       GPIO_MODER_MODE7_0
-#define MODER_LCD_E_Msk     GPIO_MODER_MODE7_Msk
-#define MODER_LCD_BCKL_0    GPIO_MODER_MODE0_0
-#define MODER_LCD_BCKL_Msk  GPIO_MODER_MODE0_Msk
+#define MODER_LCD_D7_0      GPIO_MODER_MODE3_0
+#define MODER_LCD_D7_Msk    GPIO_MODER_MODE3_Msk
+#define MODER_LCD_D6_0      GPIO_MODER_MODE2_0
+#define MODER_LCD_D6_Msk    GPIO_MODER_MODE2_Msk
+#define MODER_LCD_D5_0      GPIO_MODER_MODE1_0
+#define MODER_LCD_D5_Msk    GPIO_MODER_MODE1_Msk
+#define MODER_LCD_D4_0      GPIO_MODER_MODE0_0
+#define MODER_LCD_D4_Msk    GPIO_MODER_MODE0_Msk
+#define MODER_LCD_RS_0      GPIO_MODER_MODE13_0
+#define MODER_LCD_RS_Msk    GPIO_MODER_MODE13_Msk
+#define MODER_LCD_E_0       GPIO_MODER_MODE15_0
+#define MODER_LCD_E_Msk     GPIO_MODER_MODE15_Msk
+#define MODER_LCD_BCKL_0    GPIO_MODER_MODE7_0
+#define MODER_LCD_BCKL_Msk  GPIO_MODER_MODE7_Msk
 #if USE_RW_PIN == ON
-#define MODER_LCD_RW_0      GPIO_MODER_MODE7_0
-#define MODER_LCD_RW_Msk    GPIO_MODER_MODE7_Msk
+#define MODER_LCD_RW_0      GPIO_MODER_MODE14_0
+#define MODER_LCD_RW_Msk    GPIO_MODER_MODE14_Msk
 #endif
 /****************************END OFF define hardware connection in your application***********************/
 
@@ -226,11 +227,11 @@ static void reset_LCD_RS(void)
 }
 static void set_LCD_RW(void)
 {
-    // LCD_RW_PORT->ODR |= LCD_RW_OUT_PIN;
+    LCD_RW_PORT->ODR |= LCD_RW_OUT_PIN;
 }
 static void reset_LCD_RW(void)
 {
-    // LCD_RW_PORT->ODR &= ~LCD_RW_OUT_PIN;
+    LCD_RW_PORT->ODR &= ~LCD_RW_OUT_PIN;
 }
 static void set_LCD_BCKL(void)
 {

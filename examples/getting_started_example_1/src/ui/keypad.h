@@ -18,6 +18,7 @@ extern "C" {
 void keypad_init(void);       // create buttons, register default (app) callbacks
 void keypad_process(void);    // poll buttons; call periodically in main loop
 void set_UI_main_app_scr(void); // draw default app screen (label/info)
+void update_keypad_repetition_counters(void); 
 
 #ifdef __cplusplus
 }

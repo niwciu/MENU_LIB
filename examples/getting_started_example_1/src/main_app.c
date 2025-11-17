@@ -17,13 +17,16 @@
 void main_app(void)
 {
     // Initialize MENU_LIB (fetches display interface and validates it)
+    
+    // lcd_init();
     menu_init();
-
+    lcd_enable_backlight();
     // Initialize keypad/UI (ENTER enters the menu)
     keypad_init();
 
     // Print main app label
     set_UI_main_app_scr();
+    
 
     // --- Main loop ---
     for (;;)
@@ -34,4 +37,9 @@ void main_app(void)
         // Keep the display refreshed when buffering is enabled
         lcd_update();
     }
+}
+
+void SysTick_Handler(void)
+{
+    update_keypad_repetition_counters();
 }

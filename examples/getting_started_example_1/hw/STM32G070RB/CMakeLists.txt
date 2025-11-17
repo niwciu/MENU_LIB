@@ -24,28 +24,25 @@ set(CMAKE_TOOLCHAIN_FILE ../config/STM32/Toolchain-arm-gcc.cmake)
 # Allow assembler
 enable_language(ASM)
 
-project(STM32G071RB_TEMPLATE)
+project(STM32G070RB)
 
-add_subdirectory(../../lib/LCD_HD44780 lib_lcd_hd44780_build)
-add_subdirectory(../../lib/PUSHBUTTON_SWITCH_LIB pushbutton_lib_build)
-add_subdirectory(../../lib/MENU_LIB menu_lib_build)
 
 set(INCLUDE_DIRS
-Core
-Core/Inc
-Core/Startup
+    Core
+    Core/Inc
+    Core/Startup
 
-Drivers
-Drivers/CMSIS
-Drivers/CMSIS/Device
-Drivers/CMSIS/Include
-Drivers/CMSIS/STM32G0_Drivers
+    Drivers
+    Drivers/CMSIS
+    Drivers/CMSIS/Device
+    Drivers/CMSIS/Include
+    Drivers/CMSIS/STM32G0_Drivers
 
-../../src
-../../src/ui
+    ../../src
+    ../../src/ui
 
 
-.
+    .
 )
 
 set(C_SRCS
@@ -65,14 +62,14 @@ set(C_SRCS
     ../../src/ui/keypad.c
     ../../src/ui/menu_screen_driver_interface.c
 
-	
 )
 
 set(ASM_SRCS
-    Core/Startup/startup_stm32g071rbtx.s
+    Core/Startup/startup_stm32g070rbtx.s
 )
 
 set(GLOBAL_DEFINES
+    -DBUILD_TYPE=Debug
     -DSTM32G070xx
 )
 
@@ -91,6 +88,10 @@ add_definitions(${GLOBAL_DEFINES})
 set(MCPU "-mcpu=cortex-m0plus")
 set(LD_FILE ./linker.ld)
 include(    ../config/STM32/compiler_flags.cmake)
+
+add_subdirectory(../../lib/LCD_HD44780 lib_lcd_hd44780_build)
+add_subdirectory(../../lib/PUSHBUTTON_SWITCH_LIB pushbutton_lib_build)
+add_subdirectory(../../lib/MENU_LIB menu_lib_build)
 
 # generate elf file
 add_arm_executable(${CMAKE_PROJECT_NAME} ${C_SRCS} ${ASM_SRCS})

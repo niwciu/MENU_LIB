@@ -1,24 +1,25 @@
 {
   "version": "0.2.0",
   "configurations": [
-    {
-      "name": "C/C++ Runner: Debug Session",
-      "type": "cppdbg",
+
+   {
+      "cwd": "${workspaceFolder}",
+      "executable": "./examples/getting_started_example_1/hw/STM32G070RB/Debug/STM32G070RB.elf",
+      "name": "Debug Ubuntu HW ST32G070RBT6_LL_HAL with OpenOCD",
       "request": "launch",
-      "args": [],
-      "stopAtEntry": false,
-      "externalConsole": true,
-      "cwd": "d:/0_Projekty/Embeded_Project_Template/src",
-      "program": "d:/0_Projekty/Embeded_Project_Template/src/build/Debug/outDebug",
-      "MIMode": "gdb",
-      "miDebuggerPath": "gdb",
-      "setupCommands": [
-        {
-          "description": "Enable pretty-printing for gdb",
-          "text": "-enable-pretty-printing",
-          "ignoreFailures": true
-        }
-      ]
+      "type": "cortex-debug",
+      "servertype": "openocd",
+      "svdFile": "/opt/st/stm32cubeclt_1.18.0/STMicroelectronics_CMSIS_SVD/STM32G070.svd",
+      "configFiles": [
+        "/usr/share/openocd/scripts/interface/stlink.cfg" , 
+        "/usr/share/openocd/scripts/target/stm32g0x.cfg"            
+      ],
+      "runToEntryPoint": "main",
+      "showDevDebugOutput": "none",
+      "liveWatch": {
+        "enabled": true,
+        "samplesPerSecond": 2
+      }
     }
   ]
 }
