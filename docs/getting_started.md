@@ -172,14 +172,14 @@ Add the following files:
 extern "C" {
 #endif
 
-typedef void(*key_action_cb)(void);
+typedef void(*key_action_cb_t)(void);
 
 void keypad_init(void);                         // create buttons, register default (app) callbacks
 void keypad_process(void);                      // poll buttons; call periodically in main loop
 void update_keypad_debounce_timers(void);       // update all keys debounce timers -> mandatory to update every 1 ms 
 
 // Bind custom handlers to keypad
-void keypad_bind_conrtol_handlers( key_action_cb on_up, key_action_cb on_down, key_action_cb on_enter, key_action_cb on_esc);
+void keypad_bind_conrtol_handlers( key_action_cb_t on_up, key_action_cb_t on_down, key_action_cb_t on_enter, key_action_cb_t on_esc);
 // Keypad additional functionality for later usage
 void enable_keypad_up_down_repetition(void);
 void disable_keypad_up_down_repetition(void);
