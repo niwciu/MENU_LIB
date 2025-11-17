@@ -440,7 +440,8 @@ src/ui/menu_handlers.h
 ```
 3. **Replace generated callback bodies with thin wrappers to functions from `menu_handler` that will be implemented in next step.**
 
-    Bellow you can see menu.c file after implemenitg described changes:
+Bellow you can see menu.c file after implemenitg described changes:
+
 ```c
 #include "menu.h"
 #include "menu_handlers.h"
@@ -487,7 +488,7 @@ static void about_cb(void)
     about_enter_cb();
 }
 ```
-2. **Declare your enter callback functions** in `menu_handlers.h`:
+4. **Declare your enter callback functions** in `menu_handlers.h`:
 
 ```c
 #ifndef _MENU_HANDLERS_H_
@@ -513,7 +514,7 @@ void about_enter_cb(void);
 #endif /* _MENU_HANDLERS_H_ */
 ```
 
-4. **Define callback functions in `menu_handlers.c'**, e.g.:
+5. **Define callback functions in `menu_handlers.c'**, e.g.:
 
 ```c
 #include "menu_handlers.h"
@@ -986,10 +987,10 @@ make flash     # or: ninja flash
 
 On reset you should see:
 
-* Screen with label **“Example 1 default mode”**.
+* Screen with label **“Example 1 Main App. Screen”**.
 * Press **ENTER** → menu opens with header and first page.
 * **UP/DOWN** navigate siblings, **ENTER** enters a submenu / triggers a callback, **ESC** goes back.
-* Pressing **ESC** at top-level menu exits to the default screen (**“Example 1 default mode”**).
+* Pressing **ESC** at top-level menu exits to the default screen (**“Example 1 Main App. Screen”**).
 
 ---
 
